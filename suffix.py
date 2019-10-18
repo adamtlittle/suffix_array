@@ -8,24 +8,28 @@ with open ('/home/squee/Dropbox/OHSU/compbio/suffix/Test_Text.txt') as file:
 
     no_lines = ''.join(lines)
 
-    backwards = ''
-    for char in no_lines[::-1]:
+    for char in no_lines[:]:
         if char == ' ':
             char = char.replace(' ', '_')
-            backwards = backwards + char
         else:
-            backwards = backwards + char
+            next
 
-    print(backwards)
+    char_set = set(no_lines)
 
-appendix = []
+print(char_set)
 
-index = 1
-for i in range(0, len(backwards)):
-    appendix.append(backwards[i:i+index])
-    index += 1
+appendix = [str(len(no_lines)) + ':$']
 
-print(appendix)
+for i in range(len(no_lines), 0, -1):
+    appendix.append(str(i-1) + ':' + no_lines[i-1:] + '$')
 
+
+with open ('/home/squee/Dropbox/OHSU/compbio/suffix/output.txt', 'w') as output:
+    for item in appendix:
+        output.write(item + '\n')
+
+
+appendix.sort()
+print(appendix[9001])
 
 # Next make into dictionary with key index position, and value as suffix
